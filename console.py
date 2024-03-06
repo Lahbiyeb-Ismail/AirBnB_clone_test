@@ -5,6 +5,8 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 
+classes = {"BaseModel": BaseModel}
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
@@ -94,6 +96,55 @@ class HBNBCommand(cmd.Cmd):
                 obj_list.append(BaseModel.__str__(BaseModel(**value)))
 
         print(obj_list)
+
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id by adding or updating attribute"""
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
+
+        key = args[0] + "." + args[1]
+
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+
+        # Get dictionary representation
+        obj_dict = storage.all()[key]
+
+        # Recreate instance from dict
+        cls_name = obj_dict["__class__"]
+        cls = classes[cls_name]
+        instance = cls(**obj_dict)
+
+        # If attribute doesn't exist, add it
+        if not hasattr(instance, args[2]):
+            setattr(instance, args[2], args[3].strip('"'))
+        # Otherwise update existing attribute
+        else:
+            attr_type = type(getattr(instance, args[2]))
+            attr_value = attr_type(args[3].strip('"'))
+            setattr(instance, args[2], attr_value)
+
+        # Convert updated instance back to dict
+        new_obj_dict = instance.to_dict()
+
+        # Save updated dict to storage
+        storage.all()[key] = new_obj_dict
+        storage.save()
 
 
 if __name__ == "__main__":
