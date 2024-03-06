@@ -4,7 +4,39 @@
         "created_at": "2024-03-06T17:11:33.287315",
         "updated_at": "2024-03-06T17:11:33.287327",
         "first_name": "ismail",
-        "email": "aibnb@mail.com",
-        "__class__": "BaseModel"
+        "email": "aibnb@mail.com"
+    },
+    "User.27305492-a714-41c8-9385-05edbfb6ed57": {
+        "id": "27305492-a714-41c8-9385-05edbfb6ed57",
+        "created_at": "2024-03-06T17:42:39.800523",
+        "updated_at": "2024-03-06T17:42:39.800537",
+        "passwor": "1023",
+        "password": "1023",
+        "__class__": "User"
+    },
+    "User.66623663-9d5c-48a2-8807-d4126cd4b31a": {
+        "id": "66623663-9d5c-48a2-8807-d4126cd4b31a",
+        "created_at": "2024-03-06T17:42:39.801838",
+        "updated_at": "2024-03-06T17:42:39.801843",
+        "password": "1023",
+        "__class__": "User"
+    },
+    "User.263a5ed5-461c-45a3-bffe-284bbca1307e": {
+        "id": "263a5ed5-461c-45a3-bffe-284bbca1307e",
+        "created_at": "2024-03-06T17:43:15.131636",
+        "updated_at": "2024-03-06T17:43:15.131656",
+        "__class__": "User"
+    },
+    "User.b65b70d4-7aee-41b8-865d-574af690d42b": {
+        "id": "b65b70d4-7aee-41b8-865d-574af690d42b",
+        "created_at": "2024-03-06T17:55:18.943861",
+        "updated_at": "2024-03-06T17:55:18.943876",
+        "__class__": "User"
+    },
+    "User.63dd5ac5-fab7-4449-9bf5-ffafdfb67348": {
+        "id": "63dd5ac5-fab7-4449-9bf5-ffafdfb67348",
+        "created_at": "2024-03-06T18:21:59.524314",
+        "updated_at": "2024-03-06T18:21:59.524328",
+        "__class__": "User"
     }
 }
