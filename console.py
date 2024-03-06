@@ -80,6 +80,21 @@ class HBNBCommand(cmd.Cmd):
         del obj_dict[key]
         storage.save()
 
+    def do_all(self, arg):
+        """Prints all string representation of all instances based or not on the class name"""
+        if arg and arg != "BaseModel":
+            print("** class doesn't exist **")
+            return
+
+        obj_dict = storage.all()
+        obj_list = []
+
+        for key, value in obj_dict.items():
+            if key.split(".")[0] == "BaseModel":
+                obj_list.append(BaseModel.__str__(BaseModel(**value)))
+
+        print(obj_list)
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
