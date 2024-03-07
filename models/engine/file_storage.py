@@ -21,7 +21,4 @@ class FileStorage:
         with open(FileStorage.__file_path, "a+", encoding="utf-8") as f:
             pass
         with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-            try:
-                FileStorage.__object = json.load(f)
-            except:
-                pass
+            FileStorage.__object = json.load(f)

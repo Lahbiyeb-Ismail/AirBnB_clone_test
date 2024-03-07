@@ -43,5 +43,17 @@
         "updated_at": "2024-03-06T18:55:14.470437",
         "name": "casablanca",
         "__class__": "State"
+    },
+    "User.0e2ded4f-4f68-4e2e-a448-c1c51be60905": {
+        "id": "0e2ded4f-4f68-4e2e-a448-c1c51be60905",
+        "created_at": "2024-03-07T16:01:42.843161",
+        "updated_at": "2024-03-07T16:01:42.843179",
+        "__class__": "User"
+    },
+    "User.b8171acd-eea7-43c5-ad02-9f732d5982de": {
+        "id": "b8171acd-eea7-43c5-ad02-9f732d5982de",
+        "created_at": "2024-03-07T16:01:55.161045",
+        "updated_at": "2024-03-07T16:01:55.161056",
+        "__class__": "User"
     }
 }
