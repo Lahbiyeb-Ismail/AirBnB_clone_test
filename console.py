@@ -35,7 +35,7 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-    def emptyline(self, arg):
+    def emptyline(self):
         """Do nothing on empty input line"""
         pass
 
@@ -226,6 +226,22 @@ class HBNBCommand(cmd.Cmd):
 
         # Return the processed command string.
         return command
+
+    def do_count(self, arg):
+        """Prints the number of instances of a class"""
+        args = arg.split(" ")
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if arg and arg not in classes:
+            print("** class doesn't exist **")
+            return
+
+        count = 0
+        for key in storage.all():
+            if key.split(".")[0] == args[0]:
+                count += 1
+        print(count)
 
 
 if __name__ == "__main__":
