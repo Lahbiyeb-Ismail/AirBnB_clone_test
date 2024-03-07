@@ -103,7 +103,8 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name"""
+        """Prints all string representation of all instances
+        based or not on the class name"""
         if arg and arg not in classes:
             print("** class doesn't exist **")
             return
@@ -113,18 +114,18 @@ class HBNBCommand(cmd.Cmd):
 
         for key, value in obj_dict.items():
             cls_name = key.split(".")[0]
+            class_name = classes[cls_name]
             if not arg:
-                obj_list.append(classes[cls_name].__str__(classes[cls_name](**value)))
+                obj_list.append(class_name.__str__(class_name(**value)))
             else:
                 if cls_name == arg:
-                    obj_list.append(
-                        classes[cls_name].__str__(classes[cls_name](**value))
-                    )
+                    obj_list.append(class_name.__str__(class_name(**value)))
 
         print(obj_list)
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute"""
+        """Updates an instance based on the class name and id by adding
+        or updating attribute"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -179,19 +180,21 @@ class HBNBCommand(cmd.Cmd):
     def _precmd(self, arg):
         """parses the input, extracts relevant pieces, constructs
         a standard command string and passes it to the main handler"""
-        # regex to match the input line for a class.method(args) (EX: User.all()) pattern.
+        # regex to match the input line for a class.method(args) pattern.
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", arg)
 
         # If no match, just return the original input line.
         if not match:
             return arg
 
-        # Extract the class name, method name and arguments from the regex match groups.
+        # Extract the class name, method name and arguments
+        # from the regex match groups.
         classname = match.group(1)
         method = match.group(2)
         args = match.group(3)
 
-        # Try to further parse the arguments to extract a UID and other arguments.
+        # Try to further parse the arguments to extract
+        # a UID and other arguments.
         match_uid_and_args = re.search('^"([^"]*)"(?:, (.*))?$', args)
 
         # Extract the UID and attr/dict arguments into separate variables.

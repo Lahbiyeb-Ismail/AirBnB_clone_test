@@ -6,14 +6,6 @@
         "first_name": "ismail",
         "email": "aibnb@mail.com"
     },
-    "User.27305492-a714-41c8-9385-05edbfb6ed57": {
-        "id": "27305492-a714-41c8-9385-05edbfb6ed57",
-        "created_at": "2024-03-06T17:42:39.800523",
-        "updated_at": "2024-03-06T17:42:39.800537",
-        "passwor": "1023",
-        "password": "1023",
-        "__class__": "User"
-    },
     "User.66623663-9d5c-48a2-8807-d4126cd4b31a": {
         "id": "66623663-9d5c-48a2-8807-d4126cd4b31a",
         "created_at": "2024-03-06T17:42:39.801838",
