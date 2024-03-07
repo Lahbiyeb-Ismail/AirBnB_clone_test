@@ -7,11 +7,12 @@ from models import storage
 class BaseModel:
 
     def __init__(self, *args, **kwargs):
+        date_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key in ["created_at", "updated_at"]:
-                        value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                        value = datetime.strptime(value, date_format)
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -20,7 +21,10 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        cls_name = self.__class__.__name__
+        cls_id = self.id
+        cls_dict = self.__dict__
+        return "[{}] ({}) {}".format(cls_name, cls_id, cls_dict)
 
     def save(self):
         self.updated_at = datetime.now()
