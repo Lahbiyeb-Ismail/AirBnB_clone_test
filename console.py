@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import cmd
+import re
 
 from models import storage
 from models.amenity import Amenity
@@ -170,6 +171,61 @@ class HBNBCommand(cmd.Cmd):
         # Save updated dict to storage
         storage.all()[key] = new_obj_dict
         storage.save()
+
+    def default(self, arg):
+        """Catch commands if nothing else matches then."""
+        self._precmd(arg)
+
+    def _precmd(self, arg):
+        """parses the input, extracts relevant pieces, constructs
+        a standard command string and passes it to the main handler"""
+        # regex to match the input line for a class.method(args) (EX: User.all()) pattern.
+        match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", arg)
+
+        # If no match, just return the original input line.
+        if not match:
+            return arg
+
+        # Extract the class name, method name and arguments from the regex match groups.
+        classname = match.group(1)
+        method = match.group(2)
+        args = match.group(3)
+
+        # Try to further parse the arguments to extract a UID and other arguments.
+        match_uid_and_args = re.search('^"([^"]*)"(?:, (.*))?$', args)
+
+        # Extract the UID and attr/dict arguments into separate variables.
+        if match_uid_and_args:
+            uid = match_uid_and_args.group(1)
+            attr_or_dict = match_uid_and_args.group(2)
+        # If no match, args is just the UID.
+        else:
+            uid = args
+            attr_or_dict = False
+
+        attr_and_value = ""
+        # For update method, try to parse attribute/value from dict or string.
+        if method == "update" and attr_or_dict:
+            match_dict = re.search("^({.*})$", attr_or_dict)
+            if match_dict:
+                self.update_dict(classname, uid, match_dict.group(1))
+                return ""
+            match_attr_and_value = re.search(
+                '^(?:"([^"]*)")?(?:, (.*))?$', attr_or_dict
+            )
+            if match_attr_and_value:
+                attr_and_value = (
+                    (match_attr_and_value.group(1) or "")
+                    + " "
+                    + (match_attr_and_value.group(2) or "")
+                )
+
+        # Construct final command string and pass to main handler.
+        command = method + " " + classname + " " + uid + " " + attr_and_value
+        self.onecmd(command)
+
+        # Return the processed command string.
+        return command
 
 
 if __name__ == "__main__":
