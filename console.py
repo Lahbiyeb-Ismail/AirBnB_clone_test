@@ -24,6 +24,14 @@ classes = {
 
 
 class HBNBCommand(cmd.Cmd):
+    """Command interpreter for the HBNB project.
+
+    Contains methods for interacting with the storage engine
+    to create, show, update, and destroy objects, as well as
+    methods for listing all objects and counting instances
+    of a class.
+    """
+
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
