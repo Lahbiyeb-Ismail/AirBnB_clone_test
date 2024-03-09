@@ -169,13 +169,14 @@ class TestFileStorage(unittest.TestCase):
         """Helps tests save() method for classname."""
         self.resetStorage()
         cls = storage.classes()[classname]
+        file_path = FileStorage._FileStorage__file_path
         o = cls()
         storage.new(o)
         key = "{}.{}".format(type(o).__name__, o.id)
         storage.save()
         self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
         d = {key: o.to_dict()}
-        with open(FileStorage._FileStorage__file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             self.assertEqual(len(f.read()), len(json.dumps(d)))
             f.seek(0)
             self.assertEqual(json.load(f), d)

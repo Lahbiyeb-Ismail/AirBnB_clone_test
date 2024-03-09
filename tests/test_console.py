@@ -17,11 +17,11 @@ from models.engine.file_storage import FileStorage
 class TestHBNBCommand(unittest.TestCase):
     """Tests HBNBCommand console."""
 
-    attribute_values = {str: "foobar108", int: 1008, float: 1.08}
+    att_vals = {str: "foobar108", int: 1008, float: 1.08}
 
     reset_values = {str: "", int: 0, float: 0.0}
 
-    test_random_attributes = {"strfoo": "barfoo", "intfoo": 248, "floatfoo": 9.8}
+    rand_att = {"strfoo": "barfoo", "intfoo": 248, "floatfoo": 9.8}
 
     def setUp(self):
         """Sets up test cases."""
@@ -470,25 +470,25 @@ EOF  all  count  create  destroy  help  quit  show  update
 
     def test_update_everything(self):
         """Tests update command with errthang, like a baws."""
-        for classname, cls in self.classes().items():
-            uid = self.create_class(classname)
-            for attr, value in self.test_random_attributes.items():
-                if type(value) is not str:
+        for cls_name, cls in self.classes().items():
+            uid = self.create_class(cls_name)
+            for att, val in self.rand_att.items():
+                if type(val) is not str:
                     pass
-                quotes = type(value) == str
-                self.help_test_update(classname, uid, attr, value, quotes, False)
-                self.help_test_update(classname, uid, attr, value, quotes, True)
+                quotes = type(val) == str
+                self.help_test_update(cls_name, uid, att, val, quotes, False)
+                self.help_test_update(cls_name, uid, att, val, quotes, True)
             pass
-            if classname == "BaseModel":
+            if cls_name == "BaseModel":
                 continue
-            for attr, attr_type in self.attributes()[classname].items():
+            for att, attr_type in self.attributes()[cls_name].items():
                 if attr_type not in (str, int, float):
                     continue
                 self.help_test_update(
-                    classname, uid, attr, self.attribute_values[attr_type], True, False
+                    cls_name, uid, att, self.att_vals[attr_type], True, False
                 )
                 self.help_test_update(
-                    classname, uid, attr, self.attribute_values[attr_type], False, True
+                    cls_name, uid, att, self.att_vals[attr_type], False, True
                 )
 
     def help_test_update(self, classname, uid, attr, val, quotes, func):
