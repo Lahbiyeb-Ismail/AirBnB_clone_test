@@ -26,7 +26,7 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, "r") as f:
                 objs = json.load(f)
-                for obj_id, obj_dict in objects.items():
+                for obj_id, obj_dict in objs.items():
                     cls_name = obj_dict["__class__"]
                     cls = globals()[cls_name]
                     FileStorage.__objects[obj_id] = cls(**obj_dict)
